@@ -5,7 +5,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import pytest
-from todo_app import app, db
+from app import app, db
 
 @pytest.fixture(scope='module')
 def test_client():
