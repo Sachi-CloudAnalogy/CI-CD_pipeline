@@ -72,6 +72,7 @@ jobs:
       with:
         context: .
         file: ./Dockerfile
+        push: true
         tags: |
             sachigaur/todo_cicd:latest
             sachigaur/todo_cicd:${{ github.sha }}
