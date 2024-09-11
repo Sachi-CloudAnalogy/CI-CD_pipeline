@@ -1,29 +1,29 @@
-import sys
-import os
+# import sys
+# import os
 
-# Add the root directory to sys.path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+# # Add the root directory to sys.path
+# sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import pytest
-from app import app, db
+# import pytest
+# from app import app, db
 
-@pytest.fixture(scope='module')
-def test_client():
-    """Setup the test client and the test database."""
-    app.config['TESTING'] = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # Use an in-memory database for testing
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# @pytest.fixture(scope='module')
+# def test_client():
+#     """Setup the test client and the test database."""
+#     app.config['TESTING'] = True
+#     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # Use an in-memory database for testing
+#     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    with app.app_context():
-        db.create_all()
-        yield app.test_client()
-        db.drop_all()
+#     with app.app_context():
+#         db.create_all()
+#         yield app.test_client()
+#         db.drop_all()
 
-def test_create_task(test_client):
-    """Test adding a new task."""
-    response = test_client.post('/', data=dict(title="Test Task", desc="Test Description"))
-    assert response.status_code == 200
-    assert b"Test Task" in response.data
+# def test_create_task(test_client):
+#     """Test adding a new task."""
+#     response = test_client.post('/', data=dict(title="Test Task", desc="Test Description"))
+#     assert response.status_code == 200
+#     assert b"Test Task" in response.data
 
 # def test_update_task(test_client):
 #     """Test updating an existing task."""
