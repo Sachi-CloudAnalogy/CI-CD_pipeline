@@ -43,7 +43,7 @@ jobs:
 
     - name: Set Flask environment variables
       run: |
-        export FLASK_APP=todo_app.py
+        export FLASK_APP=app.py
         export DATABASE_URL=postgresql://postgres:sfdc@localhost:5432/flask_db
         
     - name: Apply migrations
@@ -73,8 +73,8 @@ jobs:
         context: .
         file: ./Dockerfile
         tags: |
-            sachigaur/cicd:latest
-            sachigaur/cicd:${{ github.sha }}
+            sachigaur/todo_cicd:latest
+            sachigaur/todo_cicd:${{ github.sha }}
 
     - name: Post DockerHub image build success
       run: echo "Docker image built and pushed to Docker Hub."    

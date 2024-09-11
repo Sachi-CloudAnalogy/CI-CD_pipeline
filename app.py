@@ -3,11 +3,13 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sfdc@localhost:5432/flask_db' 
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 class Todo(db.Model):
     __tablename__ = 'Todo_app'

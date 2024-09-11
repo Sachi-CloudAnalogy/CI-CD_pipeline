@@ -18,10 +18,10 @@ jobs:
 
       - name: Pull Docker Image
         run: |
-          docker pull sachigaur/cicd:latest
+          docker pull sachigaur/todo_cicd:latest
 
       - name: Deploy to Server
         run: |
           docker stop my-container || true
           docker rm my-container || true
-          docker run -d --name my-container -p 80:80 sachigaur/cicd:latest
+          docker run -d --name my-container -p 80:80 sachigaur/todo_cicd:latest

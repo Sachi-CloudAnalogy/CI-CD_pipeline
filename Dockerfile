@@ -20,5 +20,6 @@ ENV FLASK_RUN_HOST=0.0.0.0
 # Expose port 5000 (Flask default)
 EXPOSE 5000
 
-# Run the application
-CMD ["flask", "run"]
+# Run app.py when the container launches
+CMD ["python", "app.py"]
+
