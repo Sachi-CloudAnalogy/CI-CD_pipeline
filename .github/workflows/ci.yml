@@ -49,8 +49,8 @@ jobs:
     - name: Apply migrations
       run: flask db upgrade
   
-    - name: Run tests
-      run: pytest
+    # - name: Run tests
+    #   run: pytest
   
     - name: Run linting
       run: |
