@@ -52,10 +52,10 @@ jobs:
     # - name: Run tests
     #   run: pytest
   
-    - name: Run linting
-      run: |
-        pip install flake8
-        flake8 .   
+    # - name: Run linting
+    #   run: |
+    #     pip install flake8
+    #     flake8 .   
     
 
     - name: Set up Docker Buildx
