@@ -1,6 +1,9 @@
 # Stage 1: Set up PostgreSQL
 FROM postgres:14 as postgres
 
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
 # Set environment variables for PostgreSQL
 ENV POSTGRES_USER=postgres
 ENV POSTGRES_PASSWORD=sfdc
@@ -17,11 +20,13 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-COPY . .
+COPY . /app
 
 # Install the necessary packages
-COPY --from=postgres /app /app
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Install PostgreSQL client
+RUN apt-get update && apt-get install -y postgresql-client
 
 # Set environment variables
 ENV FLASK_APP=app.py
