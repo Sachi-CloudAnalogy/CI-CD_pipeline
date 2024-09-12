@@ -1,21 +1,34 @@
-# Use the official Python image as the base image
+# Stage 1: Set up PostgreSQL
+FROM postgres:14 as postgres
+
+# Set environment variables for PostgreSQL
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=sfdc
+ENV POSTGRES_DB=flask_db
+
+# Expose PostgreSQL port
+EXPOSE 5432
+
+
+# Stage 2: Set up Flask App
 FROM python:3.9-slim
 
 # Set the working directory in the container
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-COPY . .
+COPY . /app
 
-# Install the dependencies
+# Install the necessary packages
+COPY --from=postgres /app /app
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Set environment variables
-ENV FLASK_APP=todo_app.py
+ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
-# Expose port 5000 (Flask default)
+# Expose the port Flask will run on
 EXPOSE 5000
 
-# Run app.py when the container launches
-CMD ["python", "app.py"]
+# Command to run both PostgreSQL and Flask
+CMD service postgresql start && python app.py
