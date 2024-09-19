@@ -1,5 +1,5 @@
 # Base image for Python
-FROM python:3.9-slim
+FROM python:3.10-slim
 
 # Set the working directory in the container
 WORKDIR /app
@@ -18,4 +18,4 @@ ENV FLASK_RUN_HOST=0.0.0.0
 EXPOSE 5000
 
 # Command to run the Flask app
-CMD ["flask", "run"]
+CMD ["flask", "run", "--host=0.0.0.0"]
